@@ -1,20 +1,27 @@
-// script.js
-const form = document.getElementById('serviceForm');
-const statusMessage = document.getElementById('statusMessage');
+document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-// Zmień to na swój webhook Discorda
-const discordWebhookURL = "https://discord.com/api/webhooks/1314326418510839901/YOl1JKbRFJZpOvVfvoISm1nCHQxZHbQmXEgI57nGo3LCC9lc9KuvBtKfXmyS-_2_p3_S";
+    const form = document.getElementById('uploadForm');
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Pobierz dane z formularza
+    const webhookUrl = "https://discord.com/api/webhooks/1314326418510839901/YOl1JKbRFJZpOvVfvoISm1nCHQxZHbQmXEgI57nGo3LCC9lc9KuvBtKfXmyS-_2_p3_S";
+    const fileInput = document.getElementById('fileInput');
+    const statusText = document.getElementById('status');
     const name = document.getElementById('name').value;
     const userid = document.getElementById('userid').value;
     const issue = document.getElementById('issue').value;
     const subject = document.getElementById('subject').value;
     const description = document.getElementById('description').value;
     // Przygotuj payload do wysłania
+    
+    if (!webhookUrl || !fileInput.files[0]) {
+        statusText.textContent = 'Please fill out all questions';
+        return;
+    }
+
+    statusText.textContent = 'Uploading Attachment...';
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
     const payload = {
         content: "**New Nano Support Ticket**",
         embeds: [
@@ -31,25 +38,42 @@ form.addEventListener('submit', async (e) => {
         ]
     
     };
-
-    // Wyślij dane do webhooka
     try {
-        const response = await fetch(discordWebhookURL, {
+        const response = await fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
 
-        if (response.ok) {
-            statusMessage.textContent = "Support Request has beent sent! You may close this Tab now.";
-            statusMessage.style.color = "green";
+        if (response.status === 200) {
+            statusText.textContent = 'Succesfully sent';
+            statusText.style.color = "green";
+    
+        } else {
+            statusText.textContent = `Error: ${response.statusText}`;
+            statusText.style.color = "white";
+        }
+
+
+        const response1 = await fetch(webhookUrl, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response1.status === 200) {
+            statusText.textContent = 'Request Succesfully sent, you may close this tab now!';
+            statusText.style.color = "white";
             form.style.display ="none";
             form.reset();
+            
+
+
         } else {
-            throw new Error("It appears to be an error while sending your request, please try again later!");
+            statusText.textContent = `Error: ${response1.statusText}`;
+            statusText.style.color = "white";
         }
     } catch (error) {
-        statusMessage.textContent = "error: " + error.message;
-        statusMessage.style.color = "red";
+        statusText.textContent = `It appears to be an error: ${error.message}`;
+        statusText.style.color = "white";
     }
 });

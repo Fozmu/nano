@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,14 +8,14 @@ body {
     align-items: center;
     height: 100vh;
     background-size: cover;
-    background-image: url("./background.webp") 
+    background-image: url("./Nano\ background.png") 
     
 
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
+    background-color: #2a2a2a;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -25,30 +25,35 @@ body {
 
 h1 {
     font-size: 1.5em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 label {
     font-weight: bold;
     display: block;
-    margin: 10px 0 5px;
+    margin: 5px 0 5px;
+    color: #ffffff;
 }
 
 input, textarea, select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    border: 1px solid #000000;
+    color: #ffffff;
+    background-color: #393939;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
 button {
     background-color: #007bff;
-    color: #fff;
+    color: #ffffff;
     border: none;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
     font-size: 1em;
@@ -61,5 +66,5 @@ button:hover {
 #statusMessage {
     margin-top: 15px;
     font-size: 0.9em;
-    color: #333;
+    color: #e6e4e4;
 }

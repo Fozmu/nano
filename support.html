@@ -13,10 +13,15 @@
 
     
 </head>
+
+
 <body>
+
+
+   
     <div class="container">
-        <h1>Nano Support Ticket</h1>
-        <form id="serviceForm">
+        <h1>Nano Support</h1>
+        <form id="uploadForm">
             <label for="name">Username:</label>
             <input type="text" id="name" name="" required>
             <select name="issue" id="issue">
@@ -32,10 +37,14 @@
         <label for="description">Description:</label>
         <textarea id="description" name="description" rows="5" required></textarea>
 
-        <button type="submit">Send Request</button>
+            <label for="fileInput">Upload a picture:</label>
+            <input type="file" id="fileInput" accept="image/*" required>
+
+            <button type="submit">Sent Support Request</button>
         </form>
-        <p id="statusMessage"></p>
+        <p id="status"></p>
     </div>
+     
 
 <script src="script.js"></script>
 
